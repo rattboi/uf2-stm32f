@@ -255,6 +255,7 @@ void bootloader(unsigned timeout) {
             return;
         }
 
+#ifndef NO_SCREEN
         if (hasScreen() &&
             (!timeout || timer[TIMER_BL_WAIT] > 10000 || hf2_mode)) {
             if (!screen_on) {
@@ -266,6 +267,7 @@ void bootloader(unsigned timeout) {
                     draw_drag();
             }
         }
+#endif
 
         usb_callback();
     }

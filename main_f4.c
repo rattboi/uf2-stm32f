@@ -563,7 +563,9 @@ void deepsleep() {
 	setup_input_pin(CFG_PIN_BTN_UP);
 	setup_input_pin(CFG_PIN_BTN_DOWN);
 
+#ifndef NO_SCREEN
   screen_sleep();
+#endif
 
 	setup_input_pin(CFG_PIN_BTN_MENU);
 
@@ -587,7 +589,9 @@ void deepsleep() {
 	
 		int d = 0;
 		for (;;d += 50) {
+#ifndef NO_SCREEN
 			screen_delay(50);
+#endif
 			if (pin_get(CFG_PIN_BTN_MENU) == 1)
 				break;
 			if (d > 1000)
@@ -636,9 +640,11 @@ main(void)
 	uint32_t bootArg = 0;
 	uint32_t bootSig = board_get_rtc_signature(&bootArg);
 
+#ifndef NO_SCREEN
 	if (hasScreen() && lookupCfg(CFG_BOOTLOADER_PROTECTION, 0) && (FLASH_OPTCR & 0x80030000)) {
 		warning_screen(bootSig);
 	}
+#endif
 
 	DMESG("bootsig: %p", bootSig);
 
@@ -650,11 +656,15 @@ main(void)
 	}
 
 	if (bootSig == APP_RTC_SIGNATURE && bootArg == SLEEP2_RTC_ARG) {
+#ifndef NO_SCREEN
 		screen_init();
 		draw_hold_menu();
+#endif
 		setup_input_pin(CFG_PIN_BTN_MENU);
 		for (int i = 0; i < 200; ++i) {
+#ifndef NO_SCREEN
 			screen_delay(10);
+#endif
 			// if they touch MENU while the instruction screen is on,
 			// just stop the sleep and boot into app
 			if (pin_get(CFG_PIN_BTN_MENU) == 0) {
