@@ -8,6 +8,8 @@
 #define BOARD_FLASH_SIZE (256 * 1024)
 #define BOARD_ID "STM32F411-Vextreme"
 
+#define INDEX_URL "https://github.com/technobly/VEXTREME"
+#define VOLUME_LABEL "VX-BOOT"
 
 #ifdef DEFINE_CONFIGDATA
 __attribute__((section(".config"))) __attribute__((used)) //
