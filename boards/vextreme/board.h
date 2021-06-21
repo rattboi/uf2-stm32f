@@ -1,6 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "../../pins.h"
+
 #define OSC_FREQ 8
 #define USBDEVICESTRING "VEXTREME"
 #define USBMFGSTRING "PlayVectrex.com"
@@ -21,7 +23,7 @@ const uint32_t configData[] = {
     2, 0x1a, // PIN_ACCELEROMETER_SCL = PIN_SCL
     3, 0x13, // PIN_ACCELEROMETER_SDA = PIN_SDA
     4, 0x18, // PIN_BTN_A = PB08
-    5, 0xf, // PIN_BTN_B = PA15
+    CFG_PIN_LED, PB_0, // PB_0 red
     18, 0x1e, // PIN_MISO = PB14
     19, 0x1f, // PIN_MOSI = PB15
     21, 0x3, // PIN_RX = PA03
